@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Test MQTT</title>
+</head>
+<body>
+    <h1>Ultimo dato del sensor</h1>
+    <button id="btn" onclick="obtenerDato()">Obtener dato</button>
+   <script>
+    async function obtenerDato() {
+        try {
+            const res = await fetch('http://localhost:3001/dato', {
+                method: 'POST', 
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({}) 
+            });
+
+            const data = await res.json();
+            console.log("📦 Recibido (POST):", data.dato);
+            alert("Último valor recibido: " + data.dato);
+        } catch (err) {
+            console.error("❌ Error:", err);
+        }
+    }
+</script>
+</body>
+</html>
